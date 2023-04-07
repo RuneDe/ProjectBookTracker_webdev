@@ -15,62 +15,96 @@
         <li><a href="HomePage.php">Home</a></li>
         <li><a href="ListPage.php">List</a></li>
         <li><a href="BrowsePage.php">Browse</a></li>
-        <li><a href="ProfilePage.php">Profile</a></li>
+        <li><a href="ProfilePage.php"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Profile'; ?></a></li>
         <div class="dropdown">
             <button class="settingsbtn"><i class="fas fa-cog"></i></button>
             <div class="dropdown-content">
-                <li><a href="Register.php">Registreren</a></li>
-                <li><a href="Login.php">Inloggen</a></li>
-                <li><a href="Logout.php">Uitloggen</a></li>
-                <li><a href="SettingsPage.php">Instellingen</a></li>
+                <?php if (isset($_SESSION['username'])) { ?>
+                    <li><a href="Logout.php">Logout</a></li>
+                    <li><a href="SettingsPage.php">Settings</a></li>
+                <?php } else { ?>
+                    <li><a href="Register.php">Register</a></li>
+                    <li><a href="Login.php">Login</a></li>
+                <?php } ?>
             </div>
         </div>
     </ul>
-    </nav>
+</nav>
 
-    <form method="post">
-        <label for="username">Gebruikersnaam:</label>
-        <input type="text" name="username" required>
+    <form action="Login.php" method="post">
+    <div class="container">
+    <h1>Login</h1>
+    <p>Please fill in this form to login.</p>
+    <hr>
 
-        <label for="password">Wachtwoord:</label>
-        <input type="password" name="password" required>
+        <label for="email"><b>Email</b></label><br>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required ><br>
 
-        <input type="submit" name="login" value="Inloggen">
-    </form>
+        <label for="username"><b>Username</b></label><br>
+        <input type="text" placeholder="Enter Username" name="username" id="username" required ><br>
+
+        <label for="password"><b>Password</b></label><br>
+        <input type="password" placeholder="Enter Password" name="password" id="password" required><br>
+
+        <button type="submit" class="loginbtn" name='login_user'>Login</button>
+    </div>
+    <div class="container login">
+        <p>Not yet a member? <a href="Register.php">Sign up</a>.</p>
+    </div>
 
     <?php
-        // Verbinden met de database
-        $db_host = 'localhost';
-        $db_name = 'booktracker_db';
-        $db_user = 'username';
-        $db_pass = 'password';
-        $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
+session_start(); // start de sessie
 
-        // Controleren of het formulier is ingediend
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
-        // Gebruikersinvoer controleren en opschonen
-        $username = trim($_POST['username']);
-        $password = $_POST['password'];
+$errors = array(); // maak een array aan voor foutmeldingen
 
-        // Query om de gebruiker op te halen uit de database
-        $stmt = $db->prepare("SELECT * FROM users WHERE username = :username");
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-        $user = $stmt->fetch();
+// open de databaseverbinding
+$db = mysqli_connect('localhost', 'root', '', 'booktracker_db');
 
-        // Controleren of de gebruiker bestaat en het wachtwoord overeenkomt
-        if ($user && password_verify($password, $user['password'])) {
-            // Gebruiker ingelogd, sla sessievariabelen op en stuur door naar de startpagina
-            session_start();
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            header('Location: index.php');
-            exit;
+if (isset($_POST['login_user'])) {
+    $username = mysqli_real_escape_string($db, $_POST['username']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+
+    if (empty($username)) {
+        array_push($errors, "Username is required");
+    }
+    if (empty($password)) {
+        array_push($errors, "Password is required");
+    }
+
+    // check het aantal foutmeldingen, voer dan de inlogpoging uit
+    if (count($errors) == 0) {
+        
+        // gebruik een prepared statement om SQL-injecties te voorkomen
+        $stmt = mysqli_prepare($db, "SELECT * FROM users WHERE username=?");
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $user = mysqli_fetch_assoc($result);
+
+        if (mysqli_num_rows($result) == 1 && password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $username;
+            $_SESSION['success'] = "Welcome";
+            header('location: ProfilePage.php');
+            exit();
         } else {
-            // Foutief inloggegevens
-            $login_error = "Ongeldige gebruikersnaam of wachtwoord!";
+            array_push($errors, "Wrong username/password combination");
         }
-        }
-        ?>
+    }
+}
+
+// voorkom dat ingelogde gebruikers de inlogpagina zien
+if (isset($_SESSION['username'])) {
+    header('location: ProfilePage.php');
+    exit();
+}
+?>
+<?php if (count($errors) > 0) : ?>
+    <div class="error">
+        <?php foreach ($errors as $error) : ?>
+            <p><?php echo $error ?></p>
+        <?php endforeach ?>
+    </div>
+<?php endif ?>
+
 </body>
 </html>
