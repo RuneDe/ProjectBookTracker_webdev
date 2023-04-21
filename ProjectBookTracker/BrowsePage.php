@@ -10,25 +10,10 @@
     <script src="script.js"></script>
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a href="HomePage.php">Home</a></li>
-        <li><a href="ListPage.php">List</a></li>
-        <li><a href="BrowsePage.php">Browse</a></li>
-        <li><a href="ProfilePage.php"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Profile'; ?></a></li>
-        <div class="dropdown">
-            <button class="settingsbtn"><i class="fas fa-cog"></i></button>
-            <div class="dropdown-content">
-                <?php if (isset($_SESSION['username'])) { ?>
-                    <li><a href="Logout.php">Logout</a></li>
-                    <li><a href="SettingsPage.php">Settings</a></li>
-                <?php } else { ?>
-                    <li><a href="Register.php">Register</a></li>
-                    <li><a href="Login.php">Login</a></li>
-                <?php } ?>
-            </div>
-        </div>
-    </ul>
-</nav>
+<?php include_once("navbar.php"); ?>
+    <div id="contentWrapper">
+        <!-- inhoud van de Home-pagina -->
+        <p1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat eligendi tenetur facere debitis adipisci nulla repudiandae sunt possimus nesciunt quas aspernatur nisi sit eum, vero quibusdam ut nobis numquam nam.</p1>
+    </div>
 </body>
 </html>
