@@ -1,0 +1,253 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #5068a4;
+    padding: 0;
+    z-index: 1;
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  nav li {
+    float: left;
+    margin: 0 20px;
+  }
+  
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .settingsbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #e4e3e3;
+  padding: 14px 16px;
+  background-color: #5068a4;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #5068a4;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: #e4e3e3;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #7772dc;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+} 
+  nav li a {
+    display: block;
+    color: #e4e3e3;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav li a:hover {
+    background-color: #7772dc;
+    color: #e4e3e3;
+  }
+  
+  @media screen and (max-width: 600px) {
+    nav ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    nav li {
+      margin: 10px 0;
+    }
+  }
+  
+  * {box-sizing: border-box}
+
+h1 {
+  margin-top: 70px;
+  text-align: center;
+}
+
+p{
+  text-align: center;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+  text-align: center;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #5068a4;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Set a style for the login button */
+.loginbtn {
+  background-color: #5068a4;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+}
+.loginbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.login {
+  background-color: #f1f1f1;
+  text-align: center;
+  position: fixed;
+  margin-bottom: 0;
+  width: 100%; 
+  z-index: 2;
+}
+
+
+#contentWrapper{
+  background-color: lightskyblue;
+  padding: 30px 0px;
+}
+
+
+@media only screen and (max-width: 800px) {
+  #footer {
+    width: 350px;
+  }
+  #libraryCards .card {
+    width: 500px !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #footer {
+    width: 250px;
+  }
+  #libraryCards .card {
+    width: 300px !important;
+  }
+}
+
+.modal {
+  display: none; /* Verberg de modal standaard */
+  position: fixed; /* Plaats de modal bovenop de inhoud */
+  z-index: 1; /* Zorg ervoor dat de modal bovenop alle andere elementen staat */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Zorg voor scrollen als de inhoud groter is dan het scherm */
+  background-color: rgb(0,0,0); /* Fallback kleur */
+  background-color: rgba(0,0,0,0.4); /* Maak de achtergrond semi-transparant */
+}
+
+/* Stijl voor het modale inhoudsvenster */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% boven- en ondermarge om de inhoud verticaal te centreren */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Stel de breedte van het modale venster in */
+}
+
+/* Stijl voor de knop die wordt gebruikt om het modale venster te sluiten */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Stijl voor de hover van de sluitknop */
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
