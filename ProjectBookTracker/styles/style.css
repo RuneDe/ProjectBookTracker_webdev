@@ -180,38 +180,12 @@ a {
 }
 
 /* Set a grey background color and center the text of the "sign in" section */
-.login {
-  background-color: #f1f1f1;
-  text-align: center;
-  position: fixed;
-  margin-bottom: 0;
-  width: 100%; 
-  z-index: 2;
-}
+
 
 
 #contentWrapper{
   background-color: lightskyblue;
   padding: 30px 0px;
-}
-
-
-@media only screen and (max-width: 800px) {
-  #footer {
-    width: 350px;
-  }
-  #libraryCards .card {
-    width: 500px !important;
-  }
-}
-
-@media only screen and (max-width: 550px) {
-  #footer {
-    width: 250px;
-  }
-  #libraryCards .card {
-    width: 300px !important;
-  }
 }
 
 .modal {
@@ -250,4 +224,69 @@ a {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.book-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  border-color: white;
+}
+
+.book-table th {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  text-align: left;
+  padding: 12px;
+  border: 1px solid white;
+}
+
+.book-table td {
+  padding: 12px;
+  border: 1px solid white;
+}
+
+@media screen and (min-width: 768px) {
+  .book-table {
+    width: 80%;
+    margin: 20px auto;
+  }
+}
+
+/* Stijl voor de linkjes naar details en verwijderen */
+.book-table a {
+  text-decoration: none;
+  color: #008CBA;
+  font-weight: bold;
+}
+
+.book-table a:hover {
+  text-decoration: underline;
+}
+
+.books {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book {
+  width: 25%;
+  padding: 10px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.author {
+  margin-top: 5px;
+}
+
+.genre {
+  margin-top: 5px;
+}
+
+.year {
+  margin-top: 5px;
 }

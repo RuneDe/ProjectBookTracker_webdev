@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Tracker Register</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/script.js"></script>
 </head>
 <body>
 <?php include_once("navbar.php"); ?>
     <div id="contentWrapper">
-        <!-- inhoud van de Home-pagina -->
-        <p1>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat eligendi tenetur facere debitis adipisci nulla repudiandae sunt possimus nesciunt quas aspernatur nisi sit eum, vero quibusdam ut nobis numquam nam.</p1>
-    </div>
-
     <form action="Register.php" method="post"> 
 
     <div class="container">
@@ -23,26 +19,22 @@
     <p>Please fill in this form to create an account.</p>
     <hr>
 
-        <label for="email"><b>Email</b></label><br>
-        <input type="text" placeholder="Enter Email" name="email" id="email" required ><br>
+    <label for="email"><b>Email</b></label><br>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required ><br>
 
-        <label for="username"><b>Username</b></label><br>
-        <input type="text" placeholder="Enter Username" name="username" id="username" required ><br>
+    <label for="username"><b>Username</b></label><br>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required ><br>
 
-        <label for="password_1"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" name="password_1" id="password_1" required><br>
+    <label for="password_1"><b>Password</b></label><br>
+    <input type="password" placeholder="Enter Password" name="password_1" id="password_1" required><br>
 
-        <label for="password_2"><b>Repeat Password</b></label><br>
-        <input type="password" placeholder="Repeat Password" name="password_2" id="password_2" required><br>
-        <hr>
+    <label for="password_2"><b>Repeat Password</b></label><br>
+    <input type="password" placeholder="Repeat Password" name="password_2" id="password_2" required><br>
+    <hr>
 
-        <button type="submit" class="registerbtn" name="reg_user">Register</button>
-    </div>
+    <button type="submit" class="registerbtn" name="reg_user">Register</button>
+</div>
 
-    <div class="container login">
-        <p>Already have an account? <a href="Login.php">Login</a>.</p>
-    </div>
- </form>
 
  <?php
 session_start();
