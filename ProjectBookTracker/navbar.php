@@ -10,20 +10,29 @@
 
 </head>
 <body>
+<?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    $username = 'Profile';
+} else {
+    $username = $_SESSION['username'];
+}
+?>
 <nav>
     <ul>
         <li><a href="navbar.php?request=HomePage">Home</a></li>
         <li><a href="navbar.php?request=ListPage">List</a></li>
         <li><a href="navbar.php?request=BrowsePage">Browse</a></li>
-        <li><a href="navbar.php?request=ProfilePage"><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Profile'; ?></a></li>
+        <li><a href="navbar.php?request=ProfilePage"><?php echo $username; ?></a></li>
         <div class="dropdown">
             <button class="settingsbtn"><i class="fas fa-cog"></i></button>
             <div class="dropdown-content">
                 <?php if (isset($_SESSION['username'])) { ?>
-                    <li><a href="navbar.php?request=Logout">Logout</a></li>
+                    <li><a href="navbar.php?request=Logout">Logout</a></li><br>
                     <li><a href="navbar.php?request=SettingsPage">Settings</a></li>
                 <?php } else { ?>
-                    <li><a href="navbar.php?request=Register">Register</a></li>
+                    <li><a href="navbar.php?request=Register">Register</a></li><br>
                     <li><a href="navbar.php?request=Login">Login</a></li>
                 <?php } ?>
             </div>

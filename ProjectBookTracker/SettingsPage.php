@@ -1,5 +1,4 @@
 <?php
-session_start(); // start de sessie
 
 $errors = array(); // maak een array aan voor foutmeldingen
 

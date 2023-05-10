@@ -20,16 +20,16 @@
     <hr>
 
     <label for="email"><b>Email</b></label><br>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required ><br>
+    <input type="text" placeholder="Enter Email" name="email" id="email" autocomplete="off" required ><br>
 
     <label for="username"><b>Username</b></label><br>
-    <input type="text" placeholder="Enter Username" name="username" id="username" required ><br>
+    <input type="text" placeholder="Enter Username" name="username" id="username" autocomplete="off" required ><br>
 
     <label for="password_1"><b>Password</b></label><br>
-    <input type="password" placeholder="Enter Password" name="password_1" id="password_1" required><br>
+    <input type="password" placeholder="Enter Password" name="password_1" id="password_1" autocomplete="off" required><br>
 
     <label for="password_2"><b>Repeat Password</b></label><br>
-    <input type="password" placeholder="Repeat Password" name="password_2" id="password_2" required><br>
+    <input type="password" placeholder="Repeat Password" name="password_2" id="password_2" autocomplete="off" required><br>
     <hr>
 
     <button type="submit" class="registerbtn" name="reg_user">Register</button>
@@ -37,7 +37,7 @@
 
 
  <?php
-session_start();
+
 
 // initializing variables
 $username = "";
@@ -61,7 +61,7 @@ if (isset($_POST['reg_user'])) {
   if (empty($email)) { array_push($errors, "Email is required"); }
   if (empty($password_1)) { array_push($errors, "Password is required"); }
   if ($password_1 != $password_2) {
-	array_push($errors, "The two passwords do not match");
+array_push($errors, "The two passwords do not match");
   }
 
   // first check the database to make sure 
@@ -84,20 +84,21 @@ if (isset($_POST['reg_user'])) {
   if (count($errors) == 0) {
     $password = password_hash($password_1, PASSWORD_DEFAULT); //encrypt the password before saving in the database
 
-  	$query = "INSERT INTO users (username, email, password) 
-  			  VALUES('$username', '$email', '$password')";
-  	mysqli_query($db, $query);
-  	$_SESSION['username'] = $username;
-  	$_SESSION['success'] = "You are now logged in";
-  	header('location: HomePage.php');
+  $query = "INSERT INTO users (username, email, password) 
+    VALUES('$username', '$email', '$password')";
+  mysqli_query($db, $query);
+  $_SESSION['username'] = $username;
+  $_SESSION['success'] = "You are now logged in";
+  header('location: HomePage.php');
+    exit();
   }
 }
 ?>
 <?php  if (count($errors) > 0) : ?>
   <div class="error">
-  	<?php foreach ($errors as $error) : ?>
-  	  <p><?php echo $error ?></p>
-  	<?php endforeach ?>
+  <?php foreach ($errors as $error) : ?>
+    <p><?php echo $error ?></p>
+  <?php endforeach ?>
   </div>
 <?php  endif ?>
 </body>

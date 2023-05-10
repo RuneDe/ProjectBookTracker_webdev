@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-session_start(); // start de sessie
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
