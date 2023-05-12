@@ -56,13 +56,25 @@ if ($result) {
     <div class="book-container">
     <?php foreach ($books as $book) : ?>
         <div class="book">
-            <h3><?php echo $book['title']; ?></h3>
-            <img src="Covers/<?php echo str_replace(' ', '_', $book['title']) . '.jpg'; ?>" alt="<?php echo $book['title']; ?> Cover">            
-            <p><?php echo stripslashes($book['synopsis']); ?></p>            
-            <p>Author: <?php echo $book['author']; ?></p>
+            <div class="titleWrapper">
+                <h3><?php echo $book['title']; ?></h3>
+             </div>
+            <div class="bookWrapper">
+                <div class="imageWrapper">
+                    <img src="Covers/<?php echo str_replace(' ', '_', $book['title']) . '.jpg'; ?>" alt="<?php echo $book['title']; ?> Cover">            
+                </div>
+                <div class="textWrapper">
+                    <p><?php echo nl2br(stripslashes($book['synopsis'])); ?></p>   
+                </div>
+            </div>     
+            <div class="authorWrapper">  
+                <p>Author: <?php echo $book['author']; ?></p>
+            </div> 
         </div>
     <?php endforeach; ?>
-    </div>
+</div>
+
+
 
     </div>
 

@@ -1,6 +1,4 @@
 <?php
-
-
 $errors = array(); // maak een array aan voor foutmeldingen
 
 // open de databaseverbinding

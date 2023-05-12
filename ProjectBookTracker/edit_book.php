@@ -46,6 +46,10 @@ $stmt->bind_param(str_repeat("s", count($params)), ...$params);
 // Execute SQL statement
 if ($stmt->execute()) {
   echo "Book updated successfully";
+
+  // Redirect to list page on successful book edit
+  header("Location: ListPage.php");
+  exit();
 } else {
   echo "Error updating book: " . $conn->error;
 }

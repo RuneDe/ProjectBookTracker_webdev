@@ -17,7 +17,9 @@
     <?php if (isset($_SESSION['username'])) { ?>
         <p>Welcome <?php echo $_SESSION['username']; ?></p>
     <?php } else { ?>
-        <p>You are not logged in. Please <a href="login.php">log in</a> or <a href="register.php">register</a> to view your profile.</p>
+        <div class="loginText">
+            <p1>You are not logged in. Please <a href="login.php">log in</a> or <a href="register.php">register</a> to view your profile.</p>
+        </div>
     <?php } ?>
     </div>
 </body>

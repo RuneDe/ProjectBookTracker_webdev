@@ -41,8 +41,8 @@ if (!isset($_SESSION['username'])) {
 </nav>
 <div id="contentWrapper">
         <?php
-            if(isset($_GET["request"]))
-                include_once($_GET["request"].".php");
+            if(isset($_GET["request"]) && $_GET["request"] != "navbar")
+            include_once($_GET["request"].".php");        
             else
                 include_once("HomePage.php");
         ?>

@@ -62,7 +62,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2>Edit Book</h2>
-    <form id="edit-book-form">
+    <form id="edit-book-form" method="post" action="edit_book.php">
       <input type="hidden" id="book-id" name="book-id" value="">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" value=""><br>

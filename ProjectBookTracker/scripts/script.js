@@ -72,32 +72,38 @@ function addBookToList(book) {
   const deleteBtn = row.querySelector(".delete-btn");
 
   // Add click event listener to edit button
-  editBtn.addEventListener("click", async () => {
-    try {
-      // Find book ID by climbing up the row
-      const bookId = row.dataset.id;
+editBtn.addEventListener("click", async () => {
+  try {
+    // Find book ID by climbing up the row
+    const row = editBtn.closest("tr");
+    console.log("row:", row);
+    const bookId = row.dataset.id;
+    console.log("bookId:", bookId);
 
-      // Fetch book data from server and fill in form fields
-      const response = await fetch(`get_book.php?id=${bookId}`);
-      if (!response.ok) {
-        throw new Error("Response not OK");
-      }
-      const book = await response.json();
-      document.querySelector("#book-id").value = book.id;
-      document.querySelector("#title").value = book.title;
-      document.querySelector("#author").value = book.author;
-      document.querySelector("#year").value = book.year;
-      document.querySelector("#pages").value = book.pages;
-      document.querySelector("#score").value = book.score;
-      document.querySelector("#comment").value = book.comment;
-
-      // Show edit book modal
-      document.querySelector("#edit-book-modal").style.display = "block";
-    } catch (error) {
-      console.error(error);
-      // Handle error
+    // Fetch book data from server and fill in form fields
+    const response = await fetch(`get_book.php?id=${bookId}`);
+    console.log("response:", response);
+    if (!response.ok) {
+      throw new Error("Response not OK");
     }
-  });
+    const book = await response.json();
+    console.log("book:", book);
+    document.querySelector("#book-id").value = book.id;
+    document.querySelector("#title").value = book.title;
+    document.querySelector("#author").value = book.author;
+    document.querySelector("#year").value = book.year;
+    document.querySelector("#pages").value = book.pages;
+    document.querySelector("#score").value = book.score;
+    document.querySelector("#comment").value = book.comment;
+
+    // Show edit book modal
+    document.querySelector("#edit-book-modal").style.display = "block";
+  } catch (error) {
+    console.error(error);
+    // Handle error
+  }
+});
+
 
   // Add click event listener to delete button
   deleteBtn.addEventListener("click", async () => {
@@ -152,18 +158,19 @@ async function loadBookList() {
 // Load book list on page load
 window.addEventListener("load", loadBookList);
 
+// Add event listener to "Save Changes" button in "Edit book" modal
+document.querySelector("#save-changes-btn").addEventListener("click", (event) => {
+  event.preventDefault(); // Prevent default form submission behavior
+  document.querySelector("#edit-book-form").submit();
+});
+
 // Add event listener to "Edit book" form
 document.querySelector("#edit-book-form").addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent default form behavior
   const formData = new FormData(event.target); // Get form data
 
   // Find book ID from form data
-  // Find book ID from clicked row
-const row = event.target.closest("tr");
-const bookId = row.dataset.id;
-
-// Set book ID in hidden input field
-document.querySelector("#book-id").value = bookId;
+  const bookId = formData.get("book-id");
 
   try { 
     const response = await fetch("edit_book.php", {
@@ -173,15 +180,9 @@ document.querySelector("#book-id").value = bookId;
     if (!response.ok) {
       throw new Error("Response not OK");
     }
-    console.log(formData);
     window.location.href = "ListPage.php"; // Redirect to list page on successful book edit
   } catch (error) {
     console.error(error);
     // Handle error
   }
-});
-
-// Add event listener to "Close" button in "Edit book" modal
-document.querySelector("#edit-book-modal .close").addEventListener("click", () => {
-  document.querySelector("#edit-book-modal").style.display = "none";
 });
